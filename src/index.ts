@@ -12,17 +12,19 @@ const server = new McpServer({
 // Define calculator tools for each operation
 server.tool(
   "add",
+  "Suma dos números",
   {
     a: z.number(),
     b: z.number()
   },
   async ({ a, b }) => ({
     content: [{ type: "text", text: String(a + b) }]
-  })
+  }),
 );
 
 server.tool(
   "subtract",
+  "Resta dos números",
   {
     a: z.number(),
     b: z.number()
@@ -34,6 +36,7 @@ server.tool(
 
 server.tool(
   "multiply",
+  "Multiplicación de dos números",
   {
     a: z.number(),
     b: z.number()
@@ -45,6 +48,7 @@ server.tool(
 
 server.tool(
   "divide",
+  "División de dos números",
   {
     a: z.number(),
     b: z.number()
@@ -74,16 +78,6 @@ server.resource(
   })
 );
 
-server.resource(
-    "readFile",
-    new ResourceTemplate("file://{name}", { list: undefined }),
-    async (uri, { name }) => ({
-      contents: [{
-        uri: uri.href,
-        text: `Hello, ${name}!`
-      }]
-    })
-);
 
 // Start receiving messages on stdin and sending messages on stdout
 const transport = new StdioServerTransport();
